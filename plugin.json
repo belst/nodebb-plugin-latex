@@ -13,5 +13,9 @@
     ],
     "staticDirs": {
         "static": "./static"
-    }
+    },
+    "less": [
+        "./static/fonts.less",
+        "./static/katex.less"
+    ]
 }
