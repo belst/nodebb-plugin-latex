@@ -1,18 +1,21 @@
-(function(Latex){
-    var katex = module.parent.require('katex');
+"use strict";
+var katex = require('katex');
 
-    Latex.parse = function(postContent, callback) {
-        var block = /\$\$[\r\n]+([\s\S]*?)[\r\n]+\$\$/g;
-        var inline = /\$([\s\S]*?)\$/g;
+module.exports.parse = function(postContent, callback) {
+    var block = /\$\$([\s\S]*?)\$\$/g;
+    var inline = /\$([\s\S]*?)\$/g;
 
-        var replaceBlock = function(match, p1, offset, string) {
-            return katex.renderToString(p1, {displayMode: true});
-        };
-        var replaceInline = function(match, p1, offset, string) {
-            return katex.renderToString(p1, {displayMode: false});
-        }
-        postContent = postContent.replace(block, replaceBlock).replace(inline, replaceInline);
-        
-        callback(null, postContent);
+    var replaceBlock = function(match, p1, offset, string) {
+        return katex.renderToString(p1, {displayMode: true});
     };
-})(module.exports);
+    var replaceInline = function(match, p1, offset, string) {
+        return katex.renderToString(p1, {displayMode: false});
+    }
+    try {
+        postContent.postData.content = postContent.postData.replace(block, replaceBlock).replace(inline, replaceInline);
+    } catch(a) {
+
+    }
+
+    callback(null, postContent);
+};
