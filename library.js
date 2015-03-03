@@ -10,13 +10,9 @@ module.exports.parse = function(data, callback) {
     var inline = /\$([\s\S]*?)\$/g;
 
     var replaceBlock = function(match, p1, offset, string) {
-        //return katex.renderToString(p1, {displayMode: true});
-        console.log(katex.renderToString(p1, {displayMode: true}));
         return katex.renderToString(p1, {displayMode: true});
     };
     var replaceInline = function(match, p1, offset, string) {
-        //return katex.renderToString(p1, {displayMode: false});
-        console.log(katex.renderToString(p1, {displayMode: false}));
         return katex.renderToString(p1, {displayMode: false});
     }
     try {
