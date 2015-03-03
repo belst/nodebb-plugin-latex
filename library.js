@@ -1,21 +1,29 @@
 "use strict";
-var katex = require('katex');
+module.exports.parse = function(data, callback) {
+    if(!data || !data.postData || !data.postData.content) {
+        return callback(null, data);
+    }
 
-module.exports.parse = function(postContent, callback) {
+    var katex = require('katex');
+
     var block = /\$\$([\s\S]*?)\$\$/g;
     var inline = /\$([\s\S]*?)\$/g;
 
     var replaceBlock = function(match, p1, offset, string) {
+        //return katex.renderToString(p1, {displayMode: true});
+        console.log(katex.renderToString(p1, {displayMode: true}));
         return katex.renderToString(p1, {displayMode: true});
     };
     var replaceInline = function(match, p1, offset, string) {
+        //return katex.renderToString(p1, {displayMode: false});
+        console.log(katex.renderToString(p1, {displayMode: false}));
         return katex.renderToString(p1, {displayMode: false});
     }
     try {
-        postContent.postData.content = postContent.postData.replace(block, replaceBlock).replace(inline, replaceInline);
+        data.postData.content = data.postData.content.replace(block, replaceBlock).replace(inline, replaceInline);
     } catch(a) {
 
     }
 
-    callback(null, postContent);
+    callback(null, data);
 };

@@ -10,5 +10,8 @@
             "method": "parse",
             "priority": 6
         }
-    ]
+    ],
+    "staticDirs": {
+        "static": "./static"
+    }
 }
